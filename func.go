@@ -1,6 +1,10 @@
 package main
 
-import "github.com/jackc/pgx"
+import (
+	"log"
+
+	"github.com/jackc/pgx"
+)
 
 // Queryer is an interface for Query
 type Queryer interface {
@@ -42,6 +46,7 @@ func insertJob(ext Txer, name string, count int) error {
 	if _, err := ext.Exec(`INSERT INTO test (name, count) VALUES ($1, $2)`, name, count); err != nil {
 		return err
 	}
+	log.Println("insertJob ok")
 	return nil
 }
 
